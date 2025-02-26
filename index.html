@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celeb Homes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;0,500;0,700;0,900;1,400&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./images/famouscribs.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Instagram Post Container -->
+    <div class="instagram-container">
+        <!-- Post Header Section -->
+        <div class="post-header">
+            <img src="./images/profile.jpg" alt="Profile Picture" class="profile-pic">
+            <span class="username">kim kardashian</span>
+        </div>
+
+        <!-- Image Slider Section -->
+        <div class="slider">
+            <!-- Slide 1: Google Maps -->
+            <div class="slide">
+                <div class="slide-content">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d528.0849709335826!2d-118.66778899406124!3d34.17003489808614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sus!4v1740281729495!5m2!1sen!2sus"
+                        allowfullscreen
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Slide 2: Photo 1 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <img src="./images/01kim.webp" alt="Home Photo 1">
+                </div>
+            </div>
+
+            <!-- Slide 3: Photo 2 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <img src="./images/02kim.jpg" alt="Home Photo 2">
+                </div>
+            </div>
+
+            <!-- Slide 4: Photo 3 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <img src="./images/03kim.jpg" alt="Home Photo 3">
+                </div>
+            </div>
+
+            <!-- Slide 5: Photo 4 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <img src="./images/04kim.avif" alt="Home Photo 4">
+                </div>
+            </div>
+
+            <!-- Slide 6: Photo 5 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <img src="./images/05kim.jpg" alt="Home Photo 5">
+                </div>
+            </div>
+
+            <!-- Slide 7: Photo 6 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <img src="./images/06kim.avif" alt="Home Photo 6">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Indicators -->
+        <div class="slider-indicators"></div>
+
+        <!-- Post Actions Section -->
+        <div class="post-actions">
+            <button class="action-button" id="likeButton">
+                <img src="./images/unliked.svg" alt="Like" class="action-icon heart-icon unliked">
+                <img src="./images/liked.svg" alt="Liked" class="action-icon heart-icon liked hidden">
+            </button>
+            <button class="action-button">
+                <img src="/images/chat.png" alt="Comment" class="action-icon">
+            </button>
+            <button class="action-button" id="shareButton">
+                <img src="/images/send_2099085.png" alt="Share" class="action-icon">
+            </button>
+        </div>
+
+        <!-- Address Caption Section -->
+        <div class="post-caption">
+            <span class="username">Address: </span>
+            <span class="caption-text" onclick="copyText(this)">24895 Long Valley Rd, Hidden Hills, CA 91302</span>
+        </div>
+    </div>
+
+    <!-- Share Modal Structure -->
+    <div class="share-modal" id="shareModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Share Post</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="share-options">
+                <button class="share-option">
+                    <img src="/images/imessage.svg" alt="Facebook">
+                    <span>message</span>
+                </button>
+                <button class="share-option">
+                    <img src="/images/Twitter.png" alt="Twitter">
+                    <span>Twitter</span>
+                </button>
+                <button class="share-option">
+                    <img src="/images/whatsapp.png" alt="WhatsApp">
+                    <span>WhatsApp</span>
+                </button>
+                <button class="share-option">
+                    <img src="/images/gmail.png" alt="Email">
+                    <span>Gmail</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== Like Button Functionality =====
+        const likeButton = document.getElementById('likeButton');
+        const unlikedIcon = likeButton.querySelector('.unliked');
+        const likedIcon = likeButton.querySelector('.liked');
+
+        likeButton.addEventListener('click', () => {
+            // Toggle visibility of the heart icons
+            unlikedIcon.classList.toggle('hidden');
+            likedIcon.classList.toggle('hidden');
+        });
+
+        // ===== Share Modal Functionality =====
+        const shareModal = document.getElementById('shareModal');
+        const shareButton = document.getElementById('shareButton');
+
+        // Open modal
+        shareButton.addEventListener('click', () => {
+            shareModal.style.display = 'block';
+        });
+
+        // Close modal handlers
+        document.querySelector('.close-modal').addEventListener('click', () => {
+            shareModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === shareModal) {
+                shareModal.style.display = 'none';
+            }
+        });
+
+        // ===== Existing Slider Functionality =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slide');
+            const indicatorsContainer = document.querySelector('.slider-indicators');
+
+            // Add indicators
+            slides.forEach((slide, index) => {
+                const indicator = document.createElement('div');
+                indicator.classList.add('indicator');
+                if (index === 0) indicator.classList.add('active');
+                indicator.addEventListener('click', () => {
+                    slider.scrollTo({
+                        left: slider.clientWidth * index,
+                        behavior: 'smooth'
+                    });
+                });
+                indicatorsContainer.appendChild(indicator);
+            });
+
+            // Update active indicator on scroll
+            slider.addEventListener('scroll', () => {
+                const scrollPosition = slider.scrollLeft;
+                const activeIndex = Math.round(scrollPosition / slider.clientWidth);
+                document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === activeIndex);
+                });
+            });
+
+            // Prevent vertical scroll on touch devices
+            slider.addEventListener('touchmove', (e) => {
+                const touch = e.touches[0];
+                const moveX = touch.clientX;
+                const moveY = touch.clientY;
+                const rect = slider.getBoundingClientRect();
+                
+                // Only allow horizontal movement
+                if (Math.abs(moveX) > Math.abs(moveY)) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+        });
+
+        // ===== Copy Address Function =====
+        function copyText(element) {
+            navigator.clipboard.writeText(element.innerText)
+                .then(() => alert("Copied: " + element.innerText))
+                .catch(err => console.error("Copy failed:", err));
+        }
+
+
+        
+    </script>
+    
+</body>
+</html>

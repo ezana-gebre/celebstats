@@ -1,0 +1,275 @@
+/* ===== Base Styles ===== */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* ===== Instagram Post Container ===== */
+.instagram-container {
+    width: 100%;
+    max-width: 375px;
+    background-color: #fff;
+    border: 1px solid #fcfcfc;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ===== Post Header ===== */
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.profile-pic {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+    border: 1px solid #dbdbdb;
+}
+
+.username {
+    font-weight: 600;
+    font-size: 16px;
+    color: #262626;
+}
+
+/* ===== Image Slider ===== */
+.slider {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    scroll-behavior: smooth;
+    aspect-ratio: 1 / 1;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.slider::-webkit-scrollbar {
+    display: none;
+}
+
+.slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    position: relative;
+}
+
+.slide-content {
+    width: 100%;
+    height: 100%;
+}
+
+.slide-content iframe,
+.slide-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+    display: block;
+}
+
+/* ===== Slider Indicators ===== */
+.slider-indicators {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #999;
+    margin: 0 4px;
+    transition: background-color 0.3s;
+}
+
+.indicator.active {
+    background-color: #0095f6;
+}
+
+/* ===== Post Actions ===== */
+.post-actions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px 0;
+    padding-left: 15px;
+    gap: 15px;
+    border-top: 1px solid #dbdbdb;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+}
+
+.action-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* ===== Like Button ===== */
+.hidden {
+    display: none;
+}
+
+/* ===== Post Caption ===== */
+.post-caption {
+    padding: 10px;
+    border-top: 1px solid #dbdbdb;
+}
+
+.caption-text {
+    margin-left: 5px;
+    font-size: 14px;
+    color: #262626;
+    cursor: pointer;
+}
+
+/* ===== Share Modal ===== */
+.share-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 300px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dbdbdb;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 8px;
+}
+
+.share-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.share-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: none;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.share-option:hover {
+    background-color: #f8f8f8;
+}
+
+.share-option img {
+    width: 24px;
+    height: 24px;
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (min-width: 376px) {
+    .instagram-container {
+        margin: 20px auto;
+    }
+}
+
+/* ===== Modal Animations ===== */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes modalFadeOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+}
+
+.share-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.share-modal.active {
+    display: block;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+.share-modal.closing {
+    animation: modalFadeOut 0.3s ease;
+}
+
+.modal-content {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 300px;
+}
